@@ -1,4 +1,5 @@
 # Servo Control
+from __future__ import print_function
 import time
 import wiringpi
  
@@ -35,17 +36,16 @@ class servStep:
         def servoScanX(self, FREEZE):
 
                 self.freeze = FREEZE
-                print("X:",self.pulseX)
-                
+                                
                 if self.pulseX <= self.L1:
                         #change_direction left
                         self.direction = 2
-                        print("Left:",self.direction)  
+                        #print("Left:",self.direction)  
                                 
                 elif self.pulseX >= self.H1:
                         #change_direction right
                         self.direction = 1
-                        print("Right:",self.direction)
+                        #print("Right:",self.direction)
 
                 if self.freezeStep == self.freeze:
                        self.freezeStep = 0
@@ -55,8 +55,8 @@ class servStep:
                         
                 if self.freezeStep >= self.freeze:
                         print("")
-                        print("-----------------")
-                        print("--STEP--")        
+                        print("-- STEP X --")
+                        print("")
                         if self.direction == 2:
                                 #motor step left
                                 self.pulseX = self.pulseX + 1
@@ -65,6 +65,37 @@ class servStep:
                                 #motor step right
                                 self.pulseX = self.pulseX - 1
                          
+        def servoScanY(self, FREEZEY):
+
+                self.freeze = FREEZEY
+                
+                if self.pulseY <= self.L1:
+                        #change_direction left
+                        self.direction = 2
+                        print("Up:",self.direction)  
+                                
+                elif self.pulseY >= self.H1:
+                        #change_direction right
+                        self.direction = 1
+                        print("Down:",self.direction)
+
+                if self.freezeStep == self.freeze:
+                       self.freezeStep = 0
+
+                else:
+                        self.freezeStep = self.freezeStep + 1
+                        
+                if self.freezeStep >= self.freeze:
+                        print("")
+                        print("-- STEP Y --")
+                        print("")
+                        if self.direction == 2:
+                                #motor step left
+                                self.pulseY = self.pulseY + 1
+                        
+                        elif self.direction == 1:
+                                #motor step right
+                                self.pulseY = self.pulseY - 1
                 
 #SETUP
 channels = servStep(18,19)
