@@ -18,20 +18,34 @@ print(chipMov.direction)
 print('------------------------')
 print('CHIPv4B - neoChip V1')
 
-delay_period = 1
-frame_skip = 5
+#Pull DATE & TIME
+#Print into TXT file & save in ../hold
+file = open('%sdata.txt' % chipEye.filePrep,'w') 
+
+tick = time.asctime(time.localtime(time.time()))
+file.write('CHIP4') 
+print('Time:', tick)
+file.write("")
+file.write(tick)
+##file.write('Series:', chipEye.seriesNum) 
+ 
+file.close() 
+
+
+delay_period = 5
+frame_skip = 30
 
 # Use GPIO numbering
 #GPIO.setmode(GPIO.BCM)
 
 while True:
 
-        
-        chipMov.pulseChange(chipMov.pulseX,chipMov.pulseY)
-        time.sleep(delay_period)
-        chipMov.servoScanX(frame_skip)       
-        chipEye.snap('../hold/dst.jpeg')
         chipMov.pulseY = 120
+        chipMov.pulseChange(chipMov.pulseX,chipMov.pulseY)
+        chipMov.servoScanX(frame_skip)
+        time.sleep(delay_period)
+        chipEye.snap('../hold/dst.jpeg')
+
         
         #Print Stuff
         print('--------------------------')

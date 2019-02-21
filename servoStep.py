@@ -54,6 +54,7 @@ class servStep:
                         self.freezeStep = self.freezeStep + 1
                         
                 if self.freezeStep >= self.freeze:
+                        print("---------------")
                         print("")
                         print("-- STEP X --")
                         print("")
@@ -105,7 +106,6 @@ pulse_delay = channels.servoDelay(0.1)
 print("GPIO1:", channels.chan1) 
 print("GPIO2:", channels.chan2)
 print("DELAY:", channels.delay_period)
-print("------------------------")
 print("")
 
 #MOTORS INITIALIZE
